@@ -1,0 +1,8 @@
+Step 1: Find the middle index of the array.
+        Middle = 1 + (last – first)/2
+Step 2: Divide the array from the middle.
+Step 3: Call merge sort for the first half of the array
+        MergeSort(array, first, middle)
+Step 4: Call merge sort for the second half of the array.
+        MergeSort(array, middle+1, last)
+Step 5: Merge the two sorted halves into a single sorted array.

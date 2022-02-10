@@ -1,0 +1,9 @@
+Step 1 − Choose the index value as pivot
+Step 2 − Take two variables to point left and right of the list excluding pivot
+Step 3 − left points to the low index and right points to the high
+Step 4 − Now apply quick sort again to the left side of the index value 
+Step 5 − similarly apply quick sort to the right side of index value also
+Step 6 - so we will do the same as, if the value is smaller than the index value then move it to left
+         and if it is greater then move it to the right side of the index value.
+Step 7 − Now we repeat step 5 and step 6 until both the left and right dosn't get completely sorted 
+Step 8 − if left ≥ right, the point where they met is new pivot

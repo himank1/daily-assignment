@@ -1,0 +1,12 @@
+Step 1: algorithm Bubble_Sort(list)
+Step 2: Pre: list != fi
+Step 3: Post: list is sorted in ascending order for all values
+Step 4: for i <- 0 to list:Count - 1
+Step 5: for j <- 0 to list:Count - 1
+Step 6: if list[i] < list[j]
+Step 7: Swap(list[i]; list[j])
+Step 8: end if
+Step 9: end for
+Step 10: end for
+Step 11: return list
+Step 12: end Bubble_Sort
