@@ -1,0 +1,5 @@
+1. Start
+2. Input b,h
+3. Calculate area = 1/2*b*h
+4. print "Area of Triangle=" area
+5. End

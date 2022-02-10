@@ -1,0 +1,15 @@
+Step 1:Start
+
+Step 2:Read three numbers A,B & C
+
+Step 3:If A>B,then go to step 6
+
+Step 4:If B>C,then print B & go to step 8
+
+Step 5:print C is greatest & go to step 8
+
+Step 6:If A>C,then print A is greatest & go to step 8
+
+Step 7:Print C is greatest
+
+Step 8:stop

@@ -1,0 +1,19 @@
+Step 1:Start
+
+Step 2:Read number n 
+
+Step 3: set f=0
+
+Step 4: for i=2 to n-1
+
+Step 5: if n mod i=0 then
+
+Step 6: set f=1 and break
+
+Step 7: loop
+
+Step 8: if f=0 then
+        print "the given number is prime"
+        else
+        print"the given number is not prime"
+Step 9: Stop

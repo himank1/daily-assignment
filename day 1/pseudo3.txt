@@ -1,0 +1,5 @@
+Read N1,N2
+Sum N1+N2
+Subtract N1-N2
+multiply N1*N2
+divide N1/N2
