@@ -1,0 +1,197 @@
+package honey;
+
+public class Employe {
+	private String ename; //
+	private int esalary;
+	private int ecode;
+	private String eaddrs;
+	private int epincode;
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+	public int getEsalary() {
+		return esalary;
+	}
+	public void setEsalary(int esalary) {
+		this.esalary = esalary;
+	}
+	public int getEcode() {
+		return ecode;
+	}
+	public void setEcode(int ecode) {
+		this.ecode = ecode;
+	}
+	public String getEaddrs() {
+		return eaddrs;
+	}
+	public void setEaddrs(String eaddrs) {
+		this.eaddrs = eaddrs;
+	}
+	public int getEpincode() {
+		return epincode;
+	}
+	public void setEpincode(int epincode) {
+		this.epincode = epincode;
+	}
+
+	public Employe() {
+		
+	}
+	public Employe(String ename, int esalary, int ecode, String eaddrs, int epincode) {
+		super();
+		this.ename = ename;
+		this.esalary = esalary;
+		this.ecode = ecode;
+		this.eaddrs = eaddrs;
+		this.epincode = epincode;
+	}
+	@Override
+	public String toString() {
+		return "Employe [employee_name=" + ename + ", employee_salary=" + esalary + ", employee_code=" + ecode + ", employee_addrs=" + eaddrs
+				+ ", employee_pincode=" + epincode + "]";
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Client code
+
+
+
+
+package honey;
+
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Scanner;
+import java.util.Set;
+public class Client {
+
+	public static void main(String[] args) {
+		
+			
+			HashMap<Integer,Employe> employe=new HashMap<Integer,Employe>();
+			
+			int eid=10;
+			
+			while(true) {
+				
+				System.out.println("Employee managemant Application");
+				System.out.println("1.Add Employee");
+				System.out.println("2.Update Employee info.");
+				System.out.println("3.get Employee");
+				System.out.println("4.get all Employees");
+				System.out.println("5.Delete Employee");
+				
+				Scanner sc= new Scanner(System.in);
+				
+				int e=sc.nextInt();
+				
+				switch(e) {
+				
+				case 1:
+					System.out.println("Enter to add employee details");
+					System.out.println("Enter employee name");
+					       String ename=sc.next();
+					System.out.println("Enter employee salary");
+					       int esalary=sc.nextInt();
+					System.out.println("Enter employee code");
+					     int ecode=sc.nextInt();
+					System.out.println("Enter employee address");
+					       String eaddrs=sc.next();
+					System.out.println("Enter employee pincode");
+					     int epincode=sc.nextInt();
+					  
+					 Employe em= new Employe(ename, esalary, ecode, eaddrs, epincode);
+					 
+					 employe.put(++eid, em);
+					 
+					 System.out.println("employee details addedd succsfully :"+eid);
+					     
+					break;
+		       case 2:
+		    	   
+		    	   System.out.println("Enter to Update the employee details");
+		    	   
+		    	   System.out.println("Enter id to update");
+		    	              int eid1=sc.nextInt();
+		    	     System.out.println("Enter employee name");
+					       String ename1=sc.next();
+					System.out.println("Enter employee salary");
+					       int esalary1=sc.nextInt();
+					System.out.println("Enter employee code");
+					     int ecode1=sc.nextInt();
+					System.out.println("Enter employee address");
+					       String eaddrs1=sc.next();
+					System.out.println("Enter employee pincode");
+					     int epincode1=sc.nextInt();
+		    	   
+					     Employe em1= new Employe(ename1, esalary1, ecode1, eaddrs1, epincode1);
+					
+					    		employe.put(eid1, em1);
+					     
+					     System.out.println("Employee details updated successfully :"+eid1);
+					break;
+		       case 3:
+		    	   System.out.println("Enter id to get the employee details");
+		    	      int eid2=sc.nextInt();
+		 
+		    	      Employe emp=employe.get(eid2);
+		    	      System.out.println(emp);
+		    	      
+					break;
+		       case 4:
+		    	   Set<Entry<Integer, Employe>> r=employe.entrySet();
+		    	   Iterator<Entry<Integer, Employe>> itr=r.iterator();
+		    	   
+		    	   while(itr.hasNext()) {
+		    		   Entry<Integer, Employe> finalr=itr.next();
+		    		   
+		    		   System.out.println(finalr.getKey()+"  "+finalr.getValue());
+		    		   
+		    	   }
+					break;
+		       case 5:
+		    	   
+		    	   System.out.println("Enter id to delete employee");
+		    	   int eid3= sc.nextInt();
+		    	   
+		    	   Employe emp1=employe.remove(eid3);
+		    	   System.out.println("employee data deleted :"+emp1);
+					
+					break;
+				
+				
+				default:
+					System.out.println("Not an option to be selected ");
+					
+				
+				}
+				
+				
+			}
+			
+		}
+
+	}
+
