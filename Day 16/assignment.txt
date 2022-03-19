@@ -1,0 +1,192 @@
+package Honey;
+
+public class Predicate {
+	public static void main(String args[]) {
+		Predicate<Integer> p1 = i -> i % 2 == 0;
+
+		System.out.println(p1.test(54));
+
+		Predicate<String> p2 = a -> a.length() > 5;
+		System.out.println(p2.test("Himank Shah"));
+		System.out.println(p2.test("Himank "));
+		System.out.println(p2.test("Shah"));
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package Honey;
+
+import java.util.function.Function;
+
+interface addable {
+	void add(int a, int b);
+}
+
+public class Add {
+
+	public static void main(String[] args) {
+		
+		addable ad1 = (a, b) -> System.out.print(a + b);
+		ad1.add(10, 20);
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+package Honey;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+class example {
+	int e_no;
+	String e_name;
+
+	public example(int e_no, String e_name) {
+		this.e_no = e_no;
+		this.e_name = e_name;
+	}
+
+	public String toString() {
+		return e_no + "" + e_name;
+	}
+
+}
+
+public class Employee {
+	public static void main(String[] args) {
+
+		ArrayList<example> ar = new ArrayList<example>();
+
+		ar.add(new eg(123, "kartik"));
+		ar.add(new eg(124, "devashish"));
+		ar.add(new eg(125, "akash"));
+		ar.add(new eg(126, "kamal"));
+
+		System.out.println(ar);
+
+		Collections.sort(ar, (e1, e2) -> (e1.e_no > e2.e_no) ? 1 : (e1.e_no > e2.e_no) ? -1 : 0);
+
+		System.out.println(ar);
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+package Honey;
+
+import java.util.*;
+import java.util.function.Predicate;
+
+class Emp {
+
+	String e_name;
+	int salary;
+
+	public Emp() {
+
+	}
+
+	public Emp(String e_name, int salary) {
+		this.salary = salary;
+		this.e_name = e_name;
+	}
+
+	public String toString() {
+		return e_name + "" + salary;
+	}
+
+}
+
+public class EmpSal {
+
+	public static void main(String[] args) {
+		
+		ArrayList<Emp> ar = new ArrayList<Emp>();
+		ar.add(new Emp("himank", 110000));
+		ar.add(new Emp("aj", 6000));
+		ar.add(new Emp("kartik", 8900));
+		ar.add(new Emp("akash", 6800));
+		for (Emp e : ar) {
+			Predicate<Emp> p2 = a -> e.salary > 7000;
+
+			System.out.println(p2.test(e));
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+package Honey;
+
+public class Lambda {
+
+	public static void main(String[] args) {
+	
+  Runnable r = () -> System.out.println("Hello");
+		new Thread(r).start();
+		// r.run();
+	}
+
+}
+
+
+
+
+
+
+
+
+package Honey;
+
+import java.util.function.Function;
+
+public class SquareRoot {
+
+	public static void main(String[] args) {
+		
+		Function<Integer, Integer> f = i -> i * i;
+		System.out.print(f.apply(5));
+	}
+
+}
