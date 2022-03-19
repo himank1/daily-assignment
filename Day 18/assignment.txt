@@ -1,0 +1,152 @@
+//////////////////////////////////////////////////////Creating Table////////////////////////////////////////////////////////////////////
+package jdbcEx;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class CreateTable {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+		Class.forName("org.postgresql.Driver"); 
+
+		Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost/himank", "postgres", "1234"); 
+																												// the
+																												// connection
+
+		Statement stmt = conn.createStatement(); 
+
+		
+		boolean result = stmt.execute("create table iaemp(eid int,ename varchar(20))"); 
+
+		conn.close(); 
+
+		System.out.println("Table Created Successfully ");
+
+	}
+}
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////Inserting Values////////////////////////////////////////////////////////////////
+package jdbcEx;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class InsertData {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+		Class.forName("org.postgresql.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost/himank", "postgres", "1234");
+																												// the
+																												// connection
+
+		Statement stmt = conn.createStatement();
+
+
+		int result = stmt.executeUpdate("insert into iaemp values(10,'himank')");
+		conn.close();
+
+		System.out.println("Values Inserted Successfully  ");
+
+	}
+}
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////Updating Values//////////////////////////////////////////////////////////
+package jdbcEx;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class UpdateData {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+		Class.forName("org.postgresql.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost/himank", "postgres", "1234");
+																												// the
+																												// connection
+
+		Statement stmt = conn.createStatement();
+
+		
+		int result = stmt.executeUpdate("update iaemp set ename='himank shah' where eid=10");
+
+		conn.close();
+
+		System.out.println("Values updated successfully  ");
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////Fetching Values/////////////////////////////////////////////////////////////////
+package jdbcEx;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class FetchData {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+		Class.forName("org.postgresql.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost/himank", "postgres", "1234");
+																												// the
+																												// connection
+
+		Statement stmt = conn.createStatement();
+
+		
+		ResultSet result = stmt.executeQuery("select * from iaemp");
+
+		while (result.next()) {
+			System.out.println(result.getInt(1) + "  " + result.getString(2));
+		}
+
+		conn.close();
+
+		System.out.println("Values Fetched Successfully!!  ");
+
+	}
+}
