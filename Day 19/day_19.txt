@@ -1,0 +1,556 @@
+///////////////////////////////////////////////////Employee Service Implementation///////////////////////////////////////////////////////////
+package com.service;
+
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.dao.EmployeeDao;
+import com.dao.EmployeeDaoImpl;
+import com.entity.Employee;
+
+public class EmployeeServiceImpl implements EmployeeService{
+
+	EmployeeDao dao = new EmployeeDaoImpl();
+	@Override
+	public int addEmployee(Employee emp) {
+		
+		return dao.addEmployee(emp);
+	}
+
+	@Override
+	public Employee updateEmployee(int empId, Employee emp) {
+		
+		return dao.updateEmployee(empId, emp);
+	}
+
+	@Override
+	public void deleteEmployee(int empId) {
+		
+		dao.deleteEmployee(empId);
+	}
+
+	@Override
+	public Employee getEmployee(int empId) {
+		
+		return dao.getEmployee(empId);
+	}
+
+	@Override
+	public Set<Entry<Integer, Employee>> getAllEmployees() {
+		
+		return dao.getAllEmployees();
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////Employee Service///////////////////////////////////////////////////////////////
+package com.service;
+
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.entity.Employee;
+
+public interface EmployeeService {
+
+	
+	
+	int addEmployee(Employee emp);
+	Employee updateEmployee(int empId, Employee emp);
+	void deleteEmployee(int empId);
+	Employee getEmployee(int empId);
+	Set<Entry<Integer, Employee>> getAllEmployees();
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////Employee.java///////////////////////////////////////////////////////////
+package com.entity;
+
+public class Employee {
+
+	private String empName;
+	private int empSal;
+	private String empAdd;
+	private String empEmail;
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+	public int getEmpSal() {
+		return empSal;
+	}
+
+	public void setEmpSal(int empSal) {
+		this.empSal = empSal;
+	}
+
+	public String getEmpAdd() {
+		return empAdd;
+	}
+
+	public void setEmpAdd(String empAdd) {
+		this.empAdd = empAdd;
+	}
+
+	public String getEmpEmail() {
+		return empEmail;
+	}
+
+	public void setEmpEmail(String empEmail) {
+		this.empEmail = empEmail;
+	}
+
+	public Employee() {
+		
+	}
+
+	public Employee(String empName, int empSal, String empAdd, String empEmail) {
+		super();
+		this.empName = empName;
+		this.empSal = empSal;
+		this.empAdd = empAdd;
+		this.empEmail = empEmail;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [empName=" + empName + ", empSal=" + empSal + ", empAdd=" + empAdd + ", empEmail=" + empEmail
+				+ "]";
+	}
+
+}
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////Employee Dao Impl/////////////////////////////////////////////////////////////////
+package com.dao;
+
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.entity.Employee;
+
+public class EmployeeDaoImpl implements EmployeeDao{
+
+	int empId = 100;
+	HashMap<Integer, Employee> employee = new HashMap<Integer, Employee>();    
+	
+	
+	@Override
+	public int addEmployee(Employee emp) {
+		employee.put(++empId, emp);
+		
+		return empId;
+	}
+
+	@Override
+	public Employee updateEmployee(int empId, Employee emp) {
+		employee.put(empId, emp);
+		return employee.get(empId);
+	}
+
+	@Override
+	public void deleteEmployee(int empId) {
+		employee.remove(empId);
+		
+		
+	}
+
+	@Override
+	public Employee getEmployee(int empId) {
+		
+		return employee.get(empId);
+	}
+
+	@Override
+	public Set<Entry<Integer, Employee>> getAllEmployees() {
+		
+		Set<Entry<Integer, Employee>> result = employee.entrySet();
+		return result;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////Employee Dao.java/////////////////////////////////////////////////////////////////
+package com.dao;
+
+import java.util.Set;
+import java.util.Map.Entry;
+
+import com.entity.Employee;
+
+public interface EmployeeDao {
+
+	int addEmployee(Employee emp);
+	Employee updateEmployee(int empId, Employee emp);
+	void deleteEmployee(int empId);
+	Employee getEmployee(int empId);
+	Set<Entry<Integer, Employee>> getAllEmployees();
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////Regular Expression//////////////////////////////////////////////////////////////
+
+package practice;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class PatternMatching {
+
+	public static void main(String[] args) {
+		int count = 0;
+		Pattern p = Pattern.compile("ab");
+
+		Matcher m = p.matcher("ababababababbababab");
+
+		while (m.find()) {
+			count++;
+			System.out.println(m.start() + " " + m.end() + " " + m.group());
+
+		}
+		System.out.println(count);
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+package RegexPractice;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+public class RegularExpressionCharacterMatching {
+	public static void main(String[] args) {
+		Pattern pt = Pattern.compile("[abc]");
+		Matcher mt = pt.matcher("nwqea@$%&cvdga&&c");
+		while(mt.find()) {
+		System.out.println("Starting Position: "+mt.start()+" Ending Position: "+mt.end()+" Character is: "+mt.group());
+		}
+	}
+}
+
+
+
+
+
+
+
+
+package practice;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+public class RegularExpressionSpaceMatching {
+	public static void main(String[] args) {
+		Pattern pt = Pattern.compile("\\s");
+		Matcher mt = pt.matcher(" nwqea@$% &cv dga&&c");
+		while(mt.find()) {
+		System.out.println("Starting Position: "+mt.start()+" Ending Position: "+mt.end());
+		}
+	}
+}
+
+
+
+
+
+
+
+
+package practice;
+
+import java.util.regex.Pattern;
+
+public class RegularExpressionSplitEx {
+	public static void main(String[] args) {
+		Pattern pt = Pattern.compile("h");
+		String str[] = pt.split("himank shah has his own horse");
+		for(String str1 : str) {
+			System.out.println(str1);
+		}
+	}
+}
+
+
+
+
+
+
+
+package practice;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegularExpressionValidatePhoneNumber {
+	public static void main(String[] args) {
+		Pattern pt = Pattern.compile("(0 | 91) ? [7 - 9] [0 - 9] {9}");
+		Matcher mt = pt.matcher(args[0]);
+		if(mt.find() && mt.group().equals(args[0])) {
+			System.out.println("Valid mobile number");
+		}
+		else {
+			System.out.println("Invalid number");
+	}
+}
+
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++++++Date and Time++++++++++++++++++++++++++
+
+package practice;
+import java.time.LocalDate;
+import java.time.LocalTime;
+public class CurrentDateTime {
+	public static void main(String[] args) {
+		LocalDate date = LocalDate.now();
+		System.out.println("Current date is: "+date);
+		LocalTime time = LocalTime.now();
+		System.out.println("Current time is: "+time);
+	}
+}
+
+
+
+
+
+
+
+package practice;
+
+import java.time.LocalDate;
+
+public class CurrentDate {
+	public static void main(String[] args) {
+		LocalDate ld = LocalDate.now();
+		System.out.println(ld);
+		int dd = ld.getDayOfMonth();
+		int mm = ld.getMonthValue();
+		int yy = ld.getYear();
+		System.out.println(dd+" "+mm+" "+yy);
+		System.out.printf("%d-%d-%d",dd,mm,yy);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package practice;
+import java.time.LocalTime;
+public class CurrentTime {
+	public static void main(String[] args) {
+		LocalTime lt = LocalTime.now();
+		System.out.println(lt);
+		int h = lt.getHour();
+		int m = lt.getMinute();
+		int s = lt.getSecond();
+		int n = lt.getNano();
+		System.out.println(h+" "+m+" "+s+" "+n);
+		System.out.printf("%d:%d:%d:%d",h,m,s,n);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package practice;
+
+import java.time.LocalDateTime;
+
+public class DateAndTime {
+	public static void main(String[] args) {
+		LocalDateTime ldt = LocalDateTime.now();
+		System.out.println(ldt);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+import java.time.LocalDateTime;
+
+public class ParticularDateandTimeEx5 {
+	public static void main(String[] args) {
+		LocalDateTime dt = LocalDateTime.of(2022, 03, 06, 12, 34, 56);
+		System.out.println(dt);
+		System.out.println("After six months: "+dt.plusMonths(6));
+		System.out.println("Before six months: "+dt.minusMonths(6));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+package practice;
+
+import java.time.LocalDate;
+import java.time.Period;
+
+public class PeriodEx {
+	public static void main(String[] args) {
+		LocalDate lt = LocalDate.of(2001, 05, 15);
+		LocalDate dob = LocalDate.now();
+		Period pd = Period.between(lt, dob);
+		System.out.printf("Age is %d years %d Months %d days", pd.getYears(),pd.getMonths(),pd.getDays());
+	}
+}
+
+
+
+
+
+
+
+import java.time.Year;
+import java.util.Scanner;
+public class LeapYear {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the year");
+		int n = sc.nextInt();
+		Year y = Year.of(n);
+		if(y.isLeap()) {
+			System.out.printf("%d year is a leap year: ",n);
+		}
+		else {
+			System.out.printf("%d year is not a leap year: ", n);
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+public class ZonClassEx {
+	public static void main(String[] args) {
+		ZoneId zone = ZoneId.systemDefault();
+		System.out.println(zone);	
+		ZoneId id = ZoneId.of("Asia/India");
+		ZonedDateTime dt = ZonedDateTime.now(id);
+		System.out.println(dt);
+	}
+}
