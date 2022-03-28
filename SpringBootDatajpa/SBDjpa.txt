@@ -1,0 +1,343 @@
+/////////////////////////////////////Employee.java(entity)/////////////////////////////////
+
+
+package com.ia.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "springbootemp")
+public class Employee {
+
+	@Id
+	@Column(name = "eid", length = 10)
+	private int empId;
+	@Column(name = "ename", length = 15)
+	private String empName;
+	@Column(name = "esal", length = 10)
+	private int empSal;
+	@Column(name = "eadd", length = 15)
+	private String empAdd;
+
+	public int getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+	public int getEmpSal() {
+		return empSal;
+	}
+
+	public void setEmpSal(int empSal) {
+		this.empSal = empSal;
+	}
+
+	public String getEmpAdd() {
+		return empAdd;
+	}
+
+	public void setEmpAdd(String empAdd) {
+		this.empAdd = empAdd;
+	}
+
+	public Employee() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Employee(int empId, String empName, int empSal, String empAdd) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
+		this.empSal = empSal;
+		this.empAdd = empAdd;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", empName=" + empName + ", empSal=" + empSal + ", empAdd=" + empAdd + "]";
+	}
+
+}
+
+
+//////////////////////////////////////////EmployeeService.java/////////////////////////////////////
+
+
+package com.ia.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.ia.entity.Employee;
+
+public interface EmployeeService {
+
+	 Employee  addEmployee(Employee employee);
+	 
+	 Employee updateEmployee(Employee employee);
+	 
+	 void deleteEmployee(int empId);
+	 
+	 Optional<Employee> getEmployee(int empId);
+	 
+	 Iterable<Employee> getAllEmployees();
+
+}
+
+
+/////////////////////////////////////////EmployeeServiceImpl.java/////////////////////////////////////////
+
+
+package com.ia.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ia.dao.Employeedao;
+import com.ia.entity.Employee;
+
+@Service
+@Transactional
+public class EmployeeServiceImpl implements EmployeeService {
+
+	@Autowired
+	Employeedao dao;
+	
+	@Override
+	public Employee addEmployee(Employee employee) {
+		
+		return dao.save(employee);
+	}
+
+	@Override
+	public Employee updateEmployee(Employee employee) {
+		
+		return dao.save(employee);
+	}
+
+	@Override
+	public void deleteEmployee(int empId) {
+		
+		 dao.deleteById(empId);
+	}
+
+	@Override
+	public Optional<Employee> getEmployee(int empId) {
+
+		return dao.findById(empId);
+	}
+
+	@Override
+	public Iterable<Employee> getAllEmployees() {
+	
+		return dao.findAll();
+	}
+	
+	
+
+
+}
+
+
+////////////////////////////////////////////Employeedao.java//////////////////////////////////////////////
+
+
+package com.ia.dao;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.ia.entity.Employee;
+
+public interface Employeedao extends CrudRepository<Employee, Integer> {
+	
+    
+
+}
+
+
+///////////////////////////////////////////EmployeeController.java/////////////////////////////////////////
+
+
+package com.ia.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ia.entity.Employee;
+import com.ia.service.EmployeeService;
+
+@RestController
+@RequestMapping("/employee")   //link would be:  http://localhost:1423/employee
+public class EmployeeController {
+	
+	@Autowired
+	EmployeeService service;
+	
+	//we have four types of methods//	
+	// post-->insert
+	// get-->get
+	// put-->save
+	// delete-->remove
+	
+	
+	@PostMapping("/addEmployee")     //http://localhost:1423/employee/addEmployee	
+	public  Employee addEmployee(@RequestBody Employee emp)
+	{
+		return service.addEmployee(emp);
+		
+	}
+	
+	@PutMapping("/updateEmployee")     //http://localhost:1423/employee/updateEmployee	
+	public  Employee updateEmployee(@RequestBody Employee emp)
+	{
+		return service.updateEmployee(emp);
+		
+	}
+	
+	@GetMapping("/getEmployee/{eid}")     //http://localhost:1423/employee/getEmployee/eid	
+	public  Optional<Employee> getEmployee(@PathVariable("eid") int empId)
+	{
+		return service.getEmployee(empId);
+		
+	}
+	
+	@GetMapping("/getAllEmployee/{eid}")     //http://localhost:1423/employee/getAllEmployee	
+	public  Iterable<Employee> getAllEmployees()
+	{
+		return service.getAllEmployees();	
+	}
+	
+	@DeleteMapping("/deleteEmployee/{eid}")     //http://localhost:1423/employee/deleteEmployee/eid	
+	public  void deleteEmployee(@PathVariable("eid") int empId)
+	{
+		 service.deleteEmployee(empId);
+		
+	}
+	
+	
+	
+
+}
+
+
+/////////////////////////////////SpringBootDatajpaApplication.java///////////////////////////////////////////
+
+
+package com.ia;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringBootDatajpaApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootDatajpaApplication.class, args);
+	}
+
+}
+
+
+////////////////////////////////////Application.properties///////////////////////////////////////////
+
+
+server.port=1423
+spring.datasource.url=jdbc:postgresql://localhost:5432/students
+spring.datasource.username=postgres
+spring.datasource.password=himank
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+
+///////////////////////////////////////////pom.xml////////////////////////////////////////
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.ia</groupId>
+	<artifactId>springbootjparesttraine</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>SpringBootDatajpa</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
